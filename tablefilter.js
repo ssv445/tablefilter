@@ -28,7 +28,7 @@
          if(Number.isNaN(n) || Number.isNaN(v)){
              return false;
          }
-        
+        //no err
         switch(check.charAt(0)){
              case '>':
                  return (v > n);
