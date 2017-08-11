@@ -29,7 +29,7 @@
              return false;
          }
         
-        switch(check.charAt(0)){rowMatches &
+        switch(check.charAt(0)){
              case '>':
                  return (v > n);
              case '<':
