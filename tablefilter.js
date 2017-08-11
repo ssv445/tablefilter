@@ -2,6 +2,47 @@
 
 (function () {
 
+    function convertToNumber(i){
+        return parseFloat(i.replace(/[^\d\.]+/g, ''));
+    }
+    function doesMatches(check, value){
+         let operator = null;
+         switch(check.charAt(0)){
+             case '>':
+                 operator = '>';
+                 break;
+             case '<':
+                 operator = '<';
+                 break;
+             
+             case '=':
+                 operator = '=';
+                 break;
+                
+             default:
+                 return null;
+         }
+        
+         let n = convertToNumber(check);
+         let v = convertToNumber(value);
+         if(Number.isNaN(n) || Number.isNaN(v)){
+             return false;
+         }
+        
+        switch(check.charAt(0)){rowMatches &
+             case '>':
+                 return (v > n);
+             case '<':
+                 return (v < n);
+             case '=':
+                 return (v == n);               
+             default:
+                 return false;
+         }
+        
+         
+    }
+    
     // do the cells in `row` contain the strings in `filterValues`?
     function isMatchingRow(row, filterValues) {
         let cells = row.children;
@@ -10,7 +51,12 @@
             let cell = cells[c];
             let filterValue = filterValues[c];
             let cellContent = cell.innerText;
-            rowMatches &= cellContent.includes(filterValue);
+            let test = doesMatches(filterValue, cellContent);
+            if(test == null){
+                rowMatches &= cellContent.includes(filterValue);
+            }else{
+                rowMatches &= test;
+            }
         }
         return rowMatches;
     }
